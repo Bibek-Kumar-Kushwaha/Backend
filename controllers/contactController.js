@@ -1,4 +1,4 @@
-import UserData from '../models/userSchema.js';
+import UserData from '../models/userData.js';
 
 export const createContactMessage = async (req, res) => {
     const { name, email, message } = req.body;
