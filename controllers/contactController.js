@@ -1,4 +1,4 @@
-import UserData from '../models/userSchema.js'; // Make sure the path is correct relative to the current file
+import UserData from '../models/userSchema.js';
 
 export const createContactMessage = async (req, res) => {
     const { name, email, message } = req.body;
