@@ -6,32 +6,27 @@ import userRoute from './routes/userRoute.js';
 
 dotenv.config();
 const app = express();
-const PORT = process.env.PORT || 3000;
 
-// Enable CORS with specific origin (your frontend URL)
+//app.use(cors());
 app.use(cors({
-    origin: 'https://portfolio-github-io-cyan.vercel.app',
-    methods: ['GET', 'PUT', 'POST', 'DELETE'],
-    credentials: true
+    origin: process.env.FRONTENDED_URL, // Allow requests from your React frontend
+    methods: ["GET", "PUT", "DELETE", "POST"],
+    credentials: true, // Allow credentials (cookies, authorization headers, etc.)
 }));
+const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Connect to MongoDB
-connectToDB();
 
-// Routes
+
 app.use('/', userRoute);
 
-// Example route to test server status
 app.get('/', (req, res) => {
     res.send('Server is ready to serve...');
 });
 
-// Start server
+connectToDB();
 app.listen(PORT, () => {
     console.log(`Server is listening on http://localhost:${PORT}`);
 });
-
-export default app;
