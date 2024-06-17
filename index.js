@@ -9,7 +9,7 @@ const app = express();
 
 //app.use(cors());
 app.use(cors({
-    origin: "https://portfolio-github-io-cyan.vercel.app",
+    origin: "https://www.bibekkumarkushwaha.com.np/",
     methods: ["GET", "PUT", "DELETE", "POST"],
     credentials: true, 
 }));
