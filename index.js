@@ -7,12 +7,12 @@ import userRoute from './routes/userRoute.js';
 dotenv.config();
 const app = express();
 
-//app.use(cors());
-app.use(cors({
-    origin: "https://www.bibekkumarkushwaha.com.np/",
-    methods: ["GET", "PUT", "DELETE", "POST"],
-    credentials: true, 
-}));
+app.use(cors());
+// app.use(cors({
+//     origin: "https://www.bibekkumarkushwaha.com.np",
+//     methods: ["GET", "PUT", "DELETE", "POST"],
+//     credentials: true, 
+// }));
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
