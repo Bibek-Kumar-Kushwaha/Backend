@@ -10,14 +10,7 @@ const app = express();
 
 // app.use(cors());
 app.use(cors({
-<<<<<<< HEAD
     origin: "https://www.bibekkumarkushwaha.com.np",
-=======
-    origin: [
-        "https://www.bibekkumarkushwaha.com.np",
-        "http://localhost:5173"
-    ],
->>>>>>> master
     methods: ["GET", "PUT", "DELETE", "POST"],
     credentials: true, 
 }));
