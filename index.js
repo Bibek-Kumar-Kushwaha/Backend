@@ -3,14 +3,15 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import helmet from 'helmet'
 import connectToDB from './connectDB/connectDB.js';
-import userRoute from './routes/userRoute.js';
+import contactRoute from './routes/contactRoute.js';
 import visitRoute from './routes/visitRoute.js';
+import registerRoute from './routes/userRegiserRoute.js'
 dotenv.config();
 const app = express();
 
 // app.use(cors());
 app.use(cors({
-    origin: "https://www.bibekkumarkushwaha.com.np",
+    origin: "http://localhost:5173",
     methods: ["GET", "PUT", "DELETE", "POST"],
     credentials: true, 
 }));
@@ -20,8 +21,9 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/', userRoute);
+app.use('/api', contactRoute);
 app.use('/api', visitRoute);
+app.use('/api', registerRoute);
 
 app.get('/', (req, res) => {
     res.send('Server is ready to serve...');
