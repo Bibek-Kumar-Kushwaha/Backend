@@ -1,11 +1,12 @@
 import encryptPassword from '../Utils/Bcrypt.js';
 import userRegisterSchema from '../models/userRegisterSchema.js';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken'
 
 const register = async (req, res) => {
 
     const { username, email, password } = req.body;
-   
+
     // Check if all fields are provided
     if (!username || !email || !password) {
         return res.status(400).json({ message: 'All fields are required😁' });
@@ -23,13 +24,13 @@ const register = async (req, res) => {
         }
         //hashing password
         const hashPassword = await encryptPassword(password, 10);
-      
+
         // Create a new user instance with the provided data
         const userData = new userRegisterSchema(
-            { 
-                username, 
-                email, 
-                password:hashPassword 
+            {
+                username,
+                email,
+                password: hashPassword
             }
         );
 
@@ -77,6 +78,22 @@ const login = async (req, res) => {
         if (!isCorrectPassword) {
             return res.status(401).json({ message: 'Your credentials do not match😩' });
         }
+
+        //cookies set
+        const token = jwt.sign({ id: existingUser._id }, process.env.JWT_SECRET_KEY, { expiresIn: '3d' });
+
+        const cookieOptions = {
+            httpOnly: true,
+            secure: true,
+            path: '/',
+            expiresIn: 84600 * 7,
+            sameSite: 'None'
+        }
+
+        res.cookie('token', token, {
+            ...cookieOptions
+        })
+
 
         // If the password matches, return a success response
         res.status(200).json({ message: 'Successfully Logged in😊' });
